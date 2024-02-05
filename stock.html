@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Stock Data</title>
+</head>
+<body>
+    <h1>Stock Data</h1>
+    <p id="currentPrice">Current Price: Loading...</p>
+    <p id="priceChange">Price Change: Loading...</p>
+
+    <script>
+        // Fetch data from Finnhub API
+        const api_key = 'YOUR_API_KEY'; // Replace with your actual Finnhub API key
+        const symbol = 'AAPL'; // Replace with the desired stock symbol
+        const endpoint = `https://finnhub.io/api/v1/quote?symbol=${symbol}&token=${api_key}`;
+
+        fetch(endpoint)
+            .then(response => response.json())
+            .then(data => {
+                // Update HTML content with fetched data
+                document.getElementById('currentPrice').innerText = `Current Price: $${data.c}`;
+                document.getElementById('priceChange').innerText = `Price Change: $${data.d}`;
+            })
+            .catch(error => {
+                console.error('Error fetching data:', error);
+            });
+    </script>
+</body>
+</html>
